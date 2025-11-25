@@ -1,0 +1,7 @@
+# Ignore build and IDE files
+target/
+.idea/
+*.iml
+out/
+.DS_Store
+
