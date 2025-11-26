@@ -5,7 +5,7 @@
              version="3.0">
   <persistence-unit name="EmployeeService" transaction-type="RESOURCE_LOCAL">
     <description>
-      This unit does CRUD operations to a database. It does not rely
+      This unit does CRUD operations to a ©©Ω. It does not rely
       on any vendor-specific features and can therefore be deployed
       to any persistence provider.
     </description>

@@ -1,9 +1,6 @@
 package model.entity;
 
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import model.key.SalaryKey;
 
 import java.time.LocalDate;
@@ -14,6 +11,7 @@ public class Salary {
   @EmbeddedId
   private SalaryKey id;
 
+  @Column(precision = 10, scale = 2)
   private int salary;
   private LocalDate toDate;
 

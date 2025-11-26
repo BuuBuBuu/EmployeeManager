@@ -11,7 +11,6 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "titles")
 public class Title {
-
   @EmbeddedId
   private TitleKey id;
 

@@ -8,7 +8,8 @@ import java.time.LocalDate;
 @Table(name = "employees")
 public class Employee {
   @Id
-  private int emp_no;
+  @Column(precision = 11)
+  private int empNo;
 
   private LocalDate birthDate;
 
@@ -19,14 +20,15 @@ public class Employee {
   private String lastName;
 
   @Column(name = "gender", columnDefinition = "enum('M', 'F')", nullable = false)
-  private String gender;
+  @Enumerated(EnumType.STRING)
+  private Gender gender;
 
   private LocalDate hireDate;
 
   public Employee() {}
 
-  public Employee(int emp_no, LocalDate birthDate, String firstName, String lastName, String gender, LocalDate hireDate) {
-    this.emp_no = emp_no;
+  public Employee(int empNo, LocalDate birthDate, String firstName, String lastName, Gender gender, LocalDate hireDate) {
+    this.empNo = empNo;
     this.birthDate = birthDate;
     this.firstName = firstName;
     this.lastName = lastName;
@@ -34,12 +36,12 @@ public class Employee {
     this.hireDate = hireDate;
   }
 
-  public int getEmp_no() {
-    return emp_no;
+  public int getEmpNo() {
+    return empNo;
   }
 
-  public void setEmp_no(int emp_no) {
-    this.emp_no = emp_no;
+  public void setEmpNo(int empNo) {
+    this.empNo = empNo;
   }
 
   public LocalDate getBirthDate() {
@@ -66,15 +68,11 @@ public class Employee {
     this.lastName = lastName;
   }
 
-  public String getGender() {
+  public Gender getGender() {
     return gender;
   }
 
-  public void setGender(String gender) {
-    gender = gender.toLowerCase();
-    if (gender == "m" || gender == "f") {
-
-    }
+  public void setGender(Gender gender) {
     this.gender = gender;
   }
 

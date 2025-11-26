@@ -2,7 +2,6 @@ package model.entity;
 
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import model.key.DeptManagerKey;
 
