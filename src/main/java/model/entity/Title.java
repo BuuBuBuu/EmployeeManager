@@ -4,7 +4,7 @@ package model.entity;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import model.key.TitleKey;
+import model.key.TitleId;
 
 import java.time.LocalDate;
 
@@ -12,13 +12,13 @@ import java.time.LocalDate;
 @Table(name = "titles")
 public class Title {
   @EmbeddedId
-  private TitleKey id;
+  private TitleId id;
 
   private LocalDate toDate;
 
   public Title() {}
 
-  public Title(TitleKey id, LocalDate toDate) {
+  public Title(TitleId id, LocalDate toDate) {
     this.id = id;
     this.toDate = toDate;
   }

@@ -1,7 +1,7 @@
 package model.entity;
 
 import jakarta.persistence.*;
-import model.key.SalaryKey;
+import model.key.SalaryId;
 
 import java.time.LocalDate;
 
@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Table(name = "salaries")
 public class Salary {
   @EmbeddedId
-  private SalaryKey id;
+  private SalaryId id;
 
   @Column(precision = 10, scale = 2)
   private int salary;
@@ -17,7 +17,7 @@ public class Salary {
 
   public Salary() {}
 
-  public Salary(SalaryKey id, int salary, LocalDate toDate) {
+  public Salary(SalaryId id, int salary, LocalDate toDate) {
     this.id = id;
     this.salary = salary;
     this.toDate = toDate;

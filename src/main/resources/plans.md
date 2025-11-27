@@ -3,3 +3,22 @@
     - Add in the @Entity
     - Add in the @Id for primary key
     - Handle composite keys 
+3. Complete the relationship mappings
+4. 
+
+
+
+Notes:
+- Entity Manager in the driver class?
+- merge() can use for update but not necessary
+- Check if need to use any BigDecimals BigDecimal.valueOf(123)
+- Remember to em.close(); emf.close(); if never use the try with resource
+- Create the emf and em in the Main function then pass it to the EmployeeDAO for example so that it can use that instance
+  - Check the OnetoOne sample codes
+- Owner side use @OneToOne and @JoinColumn, Inverse side to use @OneToOne(mappedBy="")
+  - Check if need to do unidirectional or bidirectional
+- One to Many use bidirectional usually
+  - The owning side is the one with the * (employee)*-->1(Department)
+  - Owner is employee which each one holds a Department object
+  - Department will hold list of Employees
+- 

@@ -7,16 +7,11 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 @Embeddable
-public class SalaryKey implements Serializable {
+public class TitleId implements Serializable {
   @Column(precision = 11)
   private int empNo;
 
+  @Column(name = "title", length = 50)
+  private String title;
   private LocalDate fromDate;
-
-  public SalaryKey() {}
-
-  public SalaryKey(int empNo, LocalDate fromDate) {
-    this.empNo = empNo;
-    this.fromDate = fromDate;
-  }
 }

@@ -3,7 +3,7 @@ package model.entity;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import model.key.DeptManagerKey;
+import model.key.DeptManagerId;
 
 import java.time.LocalDate;
 
@@ -11,14 +11,14 @@ import java.time.LocalDate;
 @Table(name = "dept_manager")
 public class DeptManager {
   @EmbeddedId
-  private DeptManagerKey id;
+  private DeptManagerId id;
 
   private LocalDate fromDate;
   private LocalDate toDate;
 
   public DeptManager() {}
 
-  public DeptManager(DeptManagerKey id, LocalDate fromDate, LocalDate toDate) {
+  public DeptManager(DeptManagerId id, LocalDate fromDate, LocalDate toDate) {
     this.id = id;
     this.fromDate = fromDate;
     this.toDate = toDate;

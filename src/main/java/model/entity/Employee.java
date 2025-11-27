@@ -8,9 +8,10 @@ import java.time.LocalDate;
 @Table(name = "employees")
 public class Employee {
   @Id
-  @Column(precision = 11)
+  @Column(name = "emp_no", precision = 11)
   private int empNo;
 
+  @Column(name = "birth_date")
   private LocalDate birthDate;
 
   @Column(name = "first_name", length = 14)
@@ -19,10 +20,11 @@ public class Employee {
   @Column(name = "last_name", length = 16)
   private String lastName;
 
-  @Column(name = "gender", columnDefinition = "enum('M', 'F')", nullable = false)
+  @Column(name = "gender", nullable = false)
   @Enumerated(EnumType.STRING)
   private Gender gender;
 
+  @Column(name = "hire_date")
   private LocalDate hireDate;
 
   public Employee() {}
