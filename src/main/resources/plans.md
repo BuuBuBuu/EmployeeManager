@@ -4,7 +4,9 @@
     - Add in the @Id for primary key
     - Handle composite keys 
 3. Complete the relationship mappings
-4. 
+4. Create DAOs?
+5. Main driver class (Use try with resources to create the emf)
+6. 
 
 
 
@@ -21,4 +23,5 @@ Notes:
   - The owning side is the one with the * (employee)*-->1(Department)
   - Owner is employee which each one holds a Department object
   - Department will hold list of Employees
+- Usually the updates are more complicated
 - 

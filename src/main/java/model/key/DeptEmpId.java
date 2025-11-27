@@ -37,7 +37,7 @@ public class DeptEmpId implements Serializable {
     this.deptNo = deptNo;
   }
 
-  // Apparently ahve to override the equals and hashCode methods
+  // Apparently have to override the equals and hashCode methods
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;

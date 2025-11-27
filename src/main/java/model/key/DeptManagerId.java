@@ -4,8 +4,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
 import java.io.Serializable;
+import java.util.Objects;
 
-@Embeddable
 public class DeptManagerId implements Serializable {
   @Column(precision = 11)
   private int empNo;
@@ -20,12 +20,17 @@ public class DeptManagerId implements Serializable {
     this.deptNo = deptNo;
   }
 
+  // Apparently have to override the equals and hashCode methods
   @Override
   public boolean equals(Object o) {
-    if (this == o) return false;
+    if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     DeptManagerId that  = (DeptManagerId) o;
-    return
+    return empNo == that.empNo && Objects.equals(deptNo, that.deptNo);
+  }
 
+  @Override
+  public int hashCode() {
+    return Objects.hash(empNo, deptNo);
   }
 }

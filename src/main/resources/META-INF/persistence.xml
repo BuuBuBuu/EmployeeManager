@@ -12,15 +12,13 @@
 
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-    <!--
-    the class tag is not required for this case as the managed Entity class
-    is located at the root folder.
-    -->
 
-    <class>model.entity.Employee</class>
     <class>model.entity.Department</class>
     <class>model.entity.DeptEmp</class>
+    <class>model.entity.DeptManager</class>
+    <class>model.entity.Employee</class>
     <class>model.entity.Salary</class>
+    <class>model.entity.Title</class>
 
 
     <properties>
