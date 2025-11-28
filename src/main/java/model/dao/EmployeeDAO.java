@@ -26,19 +26,19 @@ public class EmployeeDAO {
     // I didnt really check the whole DB but its possible an employee join and then rejoin the dept
     // so if we take the EMP from the DeptEmp entity, its possible to get multiple of the same emp
     // addon the order by so that fix result when pagi
-    TypedQuery<Employee> q = em.createQuery(
+    TypedQuery<Employee> query = em.createQuery(
         "SELECT DISTINCT de.employee FROM DeptEmp de WHERE de.deptNo = :deptNo ORDER BY de.employee.empNo",
         Employee.class
     );
 
     // bind the named param
-    q.setParameter("deptNo", deptNo);
+    query.setParameter("deptNo", deptNo);
 
     // apply pagination
-    q.setFirstResult(offset);
-    q.setMaxResults(20);
+    query.setFirstResult(offset);
+    query.setMaxResults(20);
 
-    return q.getResultList();
+    return query.getResultList();
   }
 
 }

@@ -34,3 +34,26 @@ endpoint 4 POST Figure out scenarios that the DB can or cannot do. 1 DTO need
 Body takes in JSON? Comment the code well so they can understand...
 Use Jackson
 Depending on what we use will depend on whether we need to code our own serializer and deserializer
+
+endpoint 2 ++
+should return Employee number and then titles deptemp deptmanager salaries of that employee etc nested JSON
+
+endpoint 4
+things to consider
+Pass in a JSON
+from date is needed
+to date not needed just set to the 9999 or something that signifies current
+
+salary pass in integer
+Check if salary is same if same then leave it
+If not same close out the old salary
+Update new salary record in the salary
+
+just pass in empNo
+
+check if the emp is already a manager and then close their old managerial post with the end date
+Then create the new manager record with the current.
+
+check if new department is provided
+then also have to check if its the same deptEmp if not we have to close it out.
+then we have to start a new record in deptEmp for the new department that the employee has been transferred to
