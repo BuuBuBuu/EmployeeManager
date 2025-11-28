@@ -25,7 +25,7 @@
       <property name="jakarta.persistence.jdbc.driver"
                 value="org.mariadb.jdbc.Driver"/>
       <property name="jakarta.persistence.jdbc.url"
-                value="jdbc:mariadb://localhost:3306"/>
+                value="jdbc:mariadb://localhost:3306/employees"/> <!-- need to define DB name here -->
       <property name="jakarta.persistence.jdbc.user" value="root"/>
       <property name="jakarta.persistence.jdbc.password" value="0430"/>
       <property name="hibernate.show_sql" value="true" />
