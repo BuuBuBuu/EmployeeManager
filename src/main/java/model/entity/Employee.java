@@ -124,4 +124,12 @@ public class Employee {
   public void setSalaries(List<Salary> salaries) {
     this.salaries = salaries;
   }
+
+  public List<Title> getTitles() {
+    return titles;
+  }
+
+  public void setTitles(List<Title> titles) {
+    this.titles = titles;
+  }
 }

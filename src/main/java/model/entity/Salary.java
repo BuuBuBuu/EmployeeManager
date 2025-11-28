@@ -29,10 +29,10 @@ public class Salary {
 
   public Salary() {}
 
-  public Salary(int empNo, LocalDate fromDate, int salary, LocalDate toDate) {
+  public Salary(int empNo, int salary, LocalDate fromDate, LocalDate toDate) {
     this.empNo = empNo;
-    this.fromDate = fromDate;
     this.salary = salary;
+    this.fromDate = fromDate;
     this.toDate = toDate;
   }
 

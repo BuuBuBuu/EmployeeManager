@@ -2,7 +2,9 @@ package controller;
 
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import model.dto.EmployeeDTO;
+import model.dto.PromotionDTO;
 import model.entity.Employee;
 import service.EmployeeService;
 
@@ -27,5 +29,16 @@ public class EmployeeController {
       @PathParam("empNo") int empNo
   ) {
     return employeeService.findEmployeeById(empNo);
+  }
+
+  @POST
+  @Path("promote")
+  @Consumes(MediaType.APPLICATION_JSON)
+  public Response promoteEmployee(
+          PromotionDTO promotionDTO
+  ) {
+    return employeeService.promoteEmployeeById(promotionDTO);
+
+
   }
 }
