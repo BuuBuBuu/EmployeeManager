@@ -22,7 +22,11 @@ public class EmployeeService {
   private SalaryDAO salaryDAO = new SalaryDAO();
   private TitleDAO titleDAO = new TitleDAO();
 
-  public Employee findEmployeeById(int empNo) {
+    private Employee findEmployeeById(int empNo, EntityManager em) {
+      return dao.findById(em, empNo);
+    }
+
+    public Employee findEmployeeById(int empNo) {
     {
       EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
 
@@ -41,7 +45,10 @@ public class EmployeeService {
 
     LocalDate fromDate = LocalDate.now();
     LocalDate datePointer = LocalDate.of(9999, 1, 1);
+//            em.getTransaction().begin();
+//        em.getTransaction().commit();
 
+    // TO DO put the try catch thing here
     Employee employee = findEmployeeById(promotionDTO.getEmpNo());
     List<Salary> salaries = employee.getSalaries();
     for (Salary salary : salaries) {
