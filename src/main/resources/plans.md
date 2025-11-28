@@ -57,3 +57,8 @@ Then create the new manager record with the current.
 check if new department is provided
 then also have to check if its the same deptEmp if not we have to close it out.
 then we have to start a new record in deptEmp for the new department that the employee has been transferred to
+
+
+JPQL need to manually remove the sub tables
+if you use stuff like .remove() method then no need to manually create (This is the api method from JPA)
+

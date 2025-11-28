@@ -2,6 +2,7 @@ package controller;
 
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import model.dto.EmployeeDTO;
 import model.entity.Employee;
 import service.EmployeeService;
 
@@ -13,7 +14,7 @@ public class EmployeeController {
 
   @GET
   @Produces(MediaType.APPLICATION_JSON)
-  public List<Employee> getEmployeesByDept(
+  public List<EmployeeDTO> getEmployeesByDept(
       @PathParam("deptNo") String deptNo,
       @QueryParam("page") @DefaultValue("1") int page
   ) {

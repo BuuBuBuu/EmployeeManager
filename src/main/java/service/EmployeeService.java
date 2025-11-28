@@ -2,6 +2,7 @@ package service;
 
 import jakarta.persistence.EntityManager;
 import model.dao.EmployeeDAO;
+import model.dto.EmployeeDTO;
 import model.entity.Employee;
 import model.util.JPAUtil;
 
@@ -11,7 +12,12 @@ public class EmployeeService {
 
   private EmployeeDAO dao = new EmployeeDAO();
 
-  public List<Employee> getEmployeesByDepartment(String deptNo, int page) {
+
+  public List<Employee> findEmployeeById(int empNo) {
+
+  }
+
+  public List<EmployeeDTO> getEmployeesByDepartment(String deptNo, int page) {
     if (page < 1) {
       page = 1;
     }

@@ -30,16 +30,16 @@ public class Employee {
   @Column(name = "hire_date")
   private LocalDate hireDate;
 
-  @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "employee", fetch = FetchType.EAGER)
   private List<DeptEmp> deptEmps = new ArrayList<>();
 
-  @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "employee", fetch = FetchType.EAGER)
   private List<DeptManager> deptManagers = new ArrayList<>();
 
-  @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "employee", fetch = FetchType.EAGER)
   private List<Salary> salaries = new ArrayList<>();
 
-  @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "employee", fetch = FetchType.EAGER)
   private List<Title> titles = new ArrayList<>();
 
   public Employee() {}
