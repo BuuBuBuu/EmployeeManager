@@ -20,4 +20,12 @@ public class EmployeeController {
   ) {
     return employeeService.getEmployeesByDepartment(deptNo, page);
   }
+
+  @GET
+  @Produces(MediaType.APPLICATION_JSON)
+  public Employee getEmployeeById(
+      @PathParam("empNo") int empNo
+  ) {
+    return employeeService.findEmployeeById(empNo);
+  }
 }

@@ -13,8 +13,18 @@ public class EmployeeService {
   private EmployeeDAO dao = new EmployeeDAO();
 
 
-  public List<Employee> findEmployeeById(int empNo) {
+  public Employee findEmployeeById(int empNo) {
+    {
+      EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
 
+      try {
+        return dao.findById(em, empNo);
+      } catch (Exception e) {
+        throw e;
+      } finally {
+        em.close();
+      }
+    }
   }
 
   public List<EmployeeDTO> getEmployeesByDepartment(String deptNo, int page) {
