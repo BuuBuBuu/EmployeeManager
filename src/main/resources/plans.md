@@ -29,8 +29,8 @@ Notes:
 Tips from angeline:
 endpoint 1 easy
 endpoint 2 return all 6 tables no DTOs is the hint depends on the Mapping
-endpoint 3 require JPQL
-endpoint 4 POST Figure out scenarios that the DB can or cannot do.
+endpoint 3 require JPQL 1 DTO need
+endpoint 4 POST Figure out scenarios that the DB can or cannot do. 1 DTO need
 Body takes in JSON? Comment the code well so they can understand...
 Use Jackson
 Depending on what we use will depend on whether we need to code our own serializer and deserializer
