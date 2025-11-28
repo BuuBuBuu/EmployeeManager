@@ -10,13 +10,26 @@ import java.time.LocalDate;
 @IdClass(DeptManagerId.class)
 public class DeptManager {
   @Id
+  @Column(name = "emp_no")
   private int empNo;
 
   @Id
+  @Column(name = "dept_no")
   private String deptNo;
 
+  @Column(name = "from_date")
   private LocalDate fromDate;
+
+  @Column(name = "to_date")
   private LocalDate toDate;
+
+  @ManyToOne
+  @JoinColumn(name = "emp_no", referencedColumnName = "emp_no", insertable = false, updatable = false)
+  private Employee employee;
+
+  @ManyToOne
+  @JoinColumn(name = "dept_no", referencedColumnName = "dept_no", insertable = false, updatable = false)
+  private Department department;
 
   public DeptManager() {}
 

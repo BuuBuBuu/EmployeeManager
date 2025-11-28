@@ -1,17 +1,17 @@
 package model.key;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
 public class TitleId implements Serializable {
-  @Column(precision = 11)
+  // Just add this line in serialVersionUID since seems like best practice
+  // Its a version identifier used by java serialization and if omitted, jvm compute one anyway from class details
+  // which can change across builds and cause InvalidClassException when deserialize
+  private static final long serialVersionUID = 1L;
+
   private int empNo;
 
-  @Column(name = "title", length = 50)
   private String title;
   private LocalDate fromDate;
 
@@ -37,4 +37,27 @@ public class TitleId implements Serializable {
     return Objects.hash(empNo, title, fromDate);
   }
 
+  public int getEmpNo() {
+    return empNo;
+  }
+
+  public void setEmpNo(int empNo) {
+    this.empNo = empNo;
+  }
+
+  public String getTitle() {
+    return title;
+  }
+
+  public void setTitle(String title) {
+    this.title = title;
+  }
+
+  public LocalDate getFromDate() {
+    return fromDate;
+  }
+
+  public void setFromDate(LocalDate fromDate) {
+    this.fromDate = fromDate;
+  }
 }

@@ -6,12 +6,16 @@ import jakarta.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Objects;
 
-@Embeddable
+/*
+- Remember 1 thing to not when using IdClass
+- Field names must match exactly between the IdClass and the Entity
+- Field types must also match exactly
+- Access types must also match
+ */
+
 public class DeptEmpId implements Serializable {
-  @Column(precision = 11)
   private int empNo;
 
-  @Column(name = "dept_no", nullable = false)
   private String deptNo;
 
   public DeptEmpId() {}

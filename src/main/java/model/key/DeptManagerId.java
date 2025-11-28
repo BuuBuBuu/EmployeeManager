@@ -7,10 +7,8 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class DeptManagerId implements Serializable {
-  @Column(precision = 11)
   private int empNo;
 
-  @Column(name = "dept_no", columnDefinition = "CHAR(4)", nullable = false)
   private String deptNo;
 
   public DeptManagerId() {}

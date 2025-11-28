@@ -1,9 +1,9 @@
 package model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "departments")
@@ -14,6 +14,12 @@ public class Department {
 
   @Column(name = "dept_name", length = 40)
   private String deptName;
+
+  @OneToMany(mappedBy = "department")
+  private List<DeptEmp> deptEmps = new ArrayList<>();
+
+  @OneToMany(mappedBy = "department")
+  private List<DeptManager> deptManagers = new ArrayList<>();
 
   public Department() {}
 

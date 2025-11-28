@@ -10,18 +10,24 @@ import java.time.LocalDate;
 @Table(name = "titles")
 @IdClass(TitleId.class)
 public class Title {
-  private TitleId id;
-
   @Id
+  @Column(name = "emp_no")
   private int empNo;
 
   @Id
+  @Column(name = "title")
   private String title;
 
   @Id
+  @Column(name = "from_date")
   private LocalDate fromDate;
 
+  @Column(name = "to_date")
   private LocalDate toDate;
+
+  @ManyToOne
+  @JoinColumn(name = "emp_no", referencedColumnName = "emp_no", insertable = false, updatable = false)
+  private Employee employee;
 
   public Title() {}
 
@@ -30,14 +36,6 @@ public class Title {
     this.title = title;
     this.fromDate = fromDate;
     this.toDate = toDate;
-  }
-
-  public TitleId getId() {
-    return id;
-  }
-
-  public void setId(TitleId id) {
-    this.id = id;
   }
 
   public int getEmpNo() {
@@ -70,5 +68,13 @@ public class Title {
 
   public void setToDate(LocalDate toDate) {
     this.toDate = toDate;
+  }
+
+  public Employee getEmployee() {
+    return employee;
+  }
+
+  public void setEmployee(Employee employee) {
+    this.employee = employee;
   }
 }

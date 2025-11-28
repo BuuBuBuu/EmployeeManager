@@ -10,30 +10,38 @@ import java.time.LocalDate;
 @IdClass(SalaryId.class)
 public class Salary {
   @Id
-  private int emp_no;
+  @Column(name = "emp_no")
+  private int empNo;
 
   @Id
+  @Column(name = "from_date")
   private LocalDate fromDate;
 
-  @Column(precision = 10, scale = 2)
+  @Column(name = "salary")
   private int salary;
+
+  @Column(name = "to_date")
   private LocalDate toDate;
+
+  @ManyToOne
+  @JoinColumn(name = "emp_no", referencedColumnName = "emp_no", insertable = false, updatable = false)
+  private Employee employee;
 
   public Salary() {}
 
-  public Salary(int emp_no, LocalDate fromDate, int salary, LocalDate toDate) {
-    this.emp_no = emp_no;
+  public Salary(int empNo, LocalDate fromDate, int salary, LocalDate toDate) {
+    this.empNo = empNo;
     this.fromDate = fromDate;
     this.salary = salary;
     this.toDate = toDate;
   }
 
-  public int getEmp_no() {
-    return emp_no;
+  public int getEmpNo() {
+    return empNo;
   }
 
-  public void setEmp_no(int emp_no) {
-    this.emp_no = emp_no;
+  public void setEmpNo(int empNo) {
+    this.empNo = empNo;
   }
 
   public LocalDate getFromDate() {
@@ -58,5 +66,13 @@ public class Salary {
 
   public void setToDate(LocalDate toDate) {
     this.toDate = toDate;
+  }
+
+  public Employee getEmployee() {
+    return employee;
+  }
+
+  public void setEmployee(Employee employee) {
+    this.employee = employee;
   }
 }

@@ -1,8 +1,11 @@
 package model.entity;
 
 import jakarta.persistence.*;
+import org.checkerframework.checker.units.qual.A;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "employees")
@@ -26,6 +29,18 @@ public class Employee {
 
   @Column(name = "hire_date")
   private LocalDate hireDate;
+
+  @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
+  private List<DeptEmp> deptEmps = new ArrayList<>();
+
+  @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
+  private List<DeptManager> deptManagers = new ArrayList<>();
+
+  @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
+  private List<Salary> salaries = new ArrayList<>();
+
+  @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
+  private List<Title> titles = new ArrayList<>();
 
   public Employee() {}
 
@@ -84,5 +99,29 @@ public class Employee {
 
   public void setHireDate(LocalDate hireDate) {
     this.hireDate = hireDate;
+  }
+
+  public List<DeptEmp> getDeptEmps() {
+    return deptEmps;
+  }
+
+  public void setDeptEmps(List<DeptEmp> deptEmps) {
+    this.deptEmps = deptEmps;
+  }
+
+  public List<DeptManager> getDeptManagers() {
+    return deptManagers;
+  }
+
+  public void setDeptManagers(List<DeptManager> deptManagers) {
+    this.deptManagers = deptManagers;
+  }
+
+  public List<Salary> getSalaries() {
+    return salaries;
+  }
+
+  public void setSalaries(List<Salary> salaries) {
+    this.salaries = salaries;
   }
 }
