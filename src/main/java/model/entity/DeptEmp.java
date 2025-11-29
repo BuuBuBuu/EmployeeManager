@@ -10,6 +10,7 @@ import java.time.LocalDate;
 @Table(name = "dept_emp")
 @IdClass(DeptEmpId.class)
 public class DeptEmp {
+  @JsonIgnore
   @Id
   @Column(name = "emp_no")
   private int empNo;

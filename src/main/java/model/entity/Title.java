@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @Table(name = "titles")
 @IdClass(TitleId.class)
 public class Title {
+  @JsonIgnore
   @Id
   @Column(name = "emp_no")
   private int empNo;
@@ -26,7 +27,7 @@ public class Title {
   @Column(name = "to_date")
   private LocalDate toDate;
 
-//  @JsonIgnore
+  @JsonIgnore
   @ManyToOne
   @JoinColumn(name = "emp_no", referencedColumnName = "emp_no", insertable = false, updatable = false)
   private Employee employee;
@@ -72,11 +73,11 @@ public class Title {
     this.toDate = toDate;
   }
 
-//  public Employee getEmployee() {
-//    return employee;
-//  }
-//
-//  public void setEmployee(Employee employee) {
-//    this.employee = employee;
-//  }
+  public Employee getEmployee() {
+    return employee;
+  }
+
+  public void setEmployee(Employee employee) {
+    this.employee = employee;
+  }
 }
