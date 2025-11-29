@@ -13,22 +13,32 @@ import java.util.List;
 @Path("/employees")
 public class EmployeeController {
 
-  //////////////// FOR TESTING OF TOMCAT SERVER ONLY
-  // "/EmployeeManager/service/employees/ping"
-  // rmb to put "/EmployeeManager/service/employee/"[blahblah] in front
+  EmployeeService employeeService = new EmployeeService();
+
+  ////////////////////// FOR TESTING OF TOMCAT SERVER ONLY //////////////////////
+  // " http://localhost:8080/EmployeeManager/service/employees/ping"
   @GET
   @Path("/ping")
   public Response ping() {
     return Response.ok().entity("EmployeeManager service online :)))))").build();
   }
-  //////////////// END TESTING
+  ///////////////////////////////// END TESTING /////////////////////////////////
 
-  EmployeeService employeeService = new EmployeeService();
+
+  // endpoint 2
+  // EXAMPLE: http://localhost:8080/EmployeeManager/service/employees/10001
+  @GET
+  @Path("/{empNo}")
+  @Produces(MediaType.APPLICATION_JSON)
+  public Employee getEmployeeById(
+          @PathParam("empNo") int empNo
+  ) {
+    return employeeService.findEmployeeById(empNo);
+  }
 
   // endpoint 3
-  // EXAMPLE: GET /department/d005
-  // EXAMPLE: GET /department/d005?page=2
-  // okay i understand why need serializer now hahaha
+  // EXAMPLE: http://localhost:8080/EmployeeManager/service/employees/department/d005
+  // EXAMPLE: http://localhost:8080/EmployeeManager/service/employees/department/d005?page=2
   @GET
   @Path("/department/{deptNo}")
   @Produces(MediaType.APPLICATION_JSON)
@@ -37,17 +47,6 @@ public class EmployeeController {
       @QueryParam("page") @DefaultValue("1") int page
   ) {
     return employeeService.getEmployeesByDepartment(deptNo, page);
-  }
-
-  // endpoint 2
-  // EXAMPLE: GET /10001
-  @GET
-  @Path("/{empNo}")
-  @Produces(MediaType.APPLICATION_JSON)
-  public Employee getEmployeeById(
-      @PathParam("empNo") int empNo
-  ) {
-    return employeeService.findEmployeeById(empNo);
   }
 
   // endpoint 4
@@ -59,7 +58,6 @@ public class EmployeeController {
           PromotionDTO promotionDTO
   ) {
     return employeeService.promoteEmployeeById(promotionDTO);
-
-
   }
+
 }

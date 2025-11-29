@@ -14,6 +14,8 @@ public class DepartmentController {
 
   private final DepartmentService service = new DepartmentService();
 
+// endpoint 1 - GET /departments
+// http://localhost:8080/EmployeeManager/service/departments
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   public List<Department> getAllDepartments() {
