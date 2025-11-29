@@ -1,7 +1,6 @@
 package model.entity;
 
 import jakarta.persistence.*;
-import org.checkerframework.checker.units.qual.A;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -31,10 +30,10 @@ public class Employee {
   private LocalDate hireDate;
 
   @OneToMany(mappedBy = "employee", fetch = FetchType.EAGER)
-  private List<DeptEmp> deptEmps = new ArrayList<>();
+  private List<DeptEmp> deptEmployed = new ArrayList<>();
 
   @OneToMany(mappedBy = "employee", fetch = FetchType.EAGER)
-  private List<DeptManager> deptManagers = new ArrayList<>();
+  private List<DeptManager> isDeptManager = new ArrayList<>();
 
   @OneToMany(mappedBy = "employee", fetch = FetchType.EAGER)
   private List<Salary> salaries = new ArrayList<>();
@@ -101,20 +100,20 @@ public class Employee {
     this.hireDate = hireDate;
   }
 
-  public List<DeptEmp> getDeptEmps() {
-    return deptEmps;
+  public List<DeptEmp> getdeptEmployed() {
+    return deptEmployed;
   }
 
-  public void setDeptEmps(List<DeptEmp> deptEmps) {
-    this.deptEmps = deptEmps;
+  public void setdeptEmployed(List<DeptEmp> deptEmployed) {
+    this.deptEmployed = deptEmployed;
   }
 
-  public List<DeptManager> getDeptManagers() {
-    return deptManagers;
+  public List<DeptManager> getIsDeptManager() {
+    return isDeptManager;
   }
 
-  public void setDeptManagers(List<DeptManager> deptManagers) {
-    this.deptManagers = deptManagers;
+  public void setIsDeptManager(List<DeptManager> isDeptManager) {
+    this.isDeptManager = isDeptManager;
   }
 
   public List<Salary> getSalaries() {

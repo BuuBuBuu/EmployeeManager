@@ -14,12 +14,12 @@ public class Salary {
   @Column(name = "emp_no")
   private int empNo;
 
+  @Column(name = "salary")
+  private int salary;
+
   @Id
   @Column(name = "from_date")
   private LocalDate fromDate;
-
-  @Column(name = "salary")
-  private int salary;
 
   @Column(name = "to_date")
   private LocalDate toDate;
@@ -54,20 +54,20 @@ public class Salary {
     this.empNo = empNo;
   }
 
-  public LocalDate getFromDate() {
-    return fromDate;
-  }
-
-  public void setFromDate(LocalDate fromDate) {
-    this.fromDate = fromDate;
-  }
-
   public int getSalary() {
     return salary;
   }
 
   public void setSalary(int salary) {
     this.salary = salary;
+  }
+
+  public LocalDate getFromDate() {
+    return fromDate;
+  }
+
+  public void setFromDate(LocalDate fromDate) {
+    this.fromDate = fromDate;
   }
 
   public LocalDate getToDate() {
