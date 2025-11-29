@@ -1,6 +1,7 @@
 package service;
 
 import jakarta.persistence.EntityManager;
+import jakarta.ws.rs.BadRequestException;
 import jakarta.ws.rs.core.Response;
 import model.dao.EmployeeDAO;
 import model.dao.SalaryDAO;
@@ -42,38 +43,75 @@ public class EmployeeService {
 
   public Response promoteEmployeeById(PromotionDTO promotionDTO) {
     EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+    Employee employee = findEmployeeById(promotionDTO.getEmpNo(), em);
 
-    LocalDate fromDate = LocalDate.now();
+    LocalDate currentDate = LocalDate.now();
     LocalDate datePointer = LocalDate.of(9999, 1, 1);
-//            em.getTransaction().begin();
-//        em.getTransaction().commit();
 
-    // TO DO put the try catch thing here
-    Employee employee = findEmployeeById(promotionDTO.getEmpNo());
-    List<Salary> salaries = employee.getSalaries();
-    for (Salary salary : salaries) {
-      if (salary.getToDate().equals(datePointer)) {
-        if (salary.getSalary() != promotionDTO.getSalary()) {
-          salary.setToDate(fromDate);
-          salaryDAO.create(em, promotionDTO.getEmpNo(), promotionDTO.getSalary(), fromDate, datePointer);
+    try {
+      em.getTransaction().begin();
+
+      // find employee
+      if (employee == null) {
+        throw new BadRequestException("Invalid employee id.");
+      }
+
+      // salary - DONE
+      // don't need to do process salary it is not provided
+      if (promotionDTO.getSalary() != -1) { // if not default value, means salary is provided
+
+        // if negative salary
+        if (promotionDTO.getSalary() < 0)
+           throw new BadRequestException("Invalid salary, unable to update.");
+
+        List<Salary> salaries = employee.getSalaries();
+        for (Salary salary : salaries) {
+          if (salary.getToDate().equals(datePointer)) {
+            // don't update if same salary is provided
+            if (salary.getSalary() != promotionDTO.getSalary()) {
+              salary.setToDate(currentDate);
+              salaryDAO.create(em, promotionDTO.getEmpNo(), promotionDTO.getSalary(), currentDate, datePointer);
+            }
+            break; // close the loop once you have found the salary object
+          }
         }
       }
-    }
 
-    List<Title> titles = employee.getTitles();
-    for (Title title : titles) {
-      if (title.getEmpNo() == employee.getEmpNo()) {
-        if (!Objects.equals(title.getTitle(), promotionDTO.getTitle())) {
-          title.setToDate(fromDate);
-          titleDAO.create(em, promotionDTO.getEmpNo(), promotionDTO.getTitle(), fromDate, datePointer);
-        }
+      if (!Objects.equals(promotionDTO.getTitle(), "")) { // if not empty string, means new title is provided
+// titles
+//      List<Title> titles = employee.getTitles();
+//      for (Title title : titles) {
+//        if (title.getEmpNo() == employee.getEmpNo()) {
+//          if (!Objects.equals(title.getTitle(), promotionDTO.getTitle())) {
+//            title.setToDate(currentDate);
+//            titleDAO.create(em, promotionDTO.getEmpNo(), promotionDTO.getTitle(), currentDate, datePointer);
+//          }
+//        }
+//      }
       }
+
+      if (!Objects.equals(promotionDTO.getDeptNo(), "")) { // if not empty string, means new dept is provided
+        // ok this one v mafan
+      }
+
+      // deptManager still need?
+
+      // need to change dept_emp
+      // need to change dept_manager SHOULD BE isDeptManager (???)
+
+      em.getTransaction().commit(); // if we get here,save
+      return Response.ok().build();
+
+    } catch (Exception e) {
+      if (em.getTransaction().isActive()) {
+        em.getTransaction().rollback();
+      }
+      e.printStackTrace(); // can be better, todo later
+      return Response.status(Response.Status.BAD_REQUEST).build();
+
+    } finally {
+      em.close();
     }
-
-    // need to change dept_emp
-    // need to change dept_manager
-
-    return Response.ok().build();
   }
 
   public List<EmployeeDTO> getEmployeesByDepartment(String deptNo, int page) {

@@ -13,6 +13,12 @@ public class PromotionDTO {
         this.deptNo = deptNo;
     }
 
+    public PromotionDTO() {
+        this.salary = -1;
+        this.title = "";
+        this.deptNo = ""; // put in "default" values so that you can check whether user has provided that input
+    }
+
     public int getEmpNo() {
         return empNo;
     }
