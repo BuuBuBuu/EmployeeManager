@@ -1,5 +1,6 @@
 package model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import model.key.DeptEmpId;
 
@@ -38,6 +39,8 @@ public class DeptEmp {
   // @JoinColumn tells Hibernate HOW the reference is stored in the database.
   // (The FK column is emp_no), (That FK points to Employee's PK [referencedColumnName]
   // TLDR for @JoinColumn = This tells Hibernate: which column to use as the pointer
+  @JsonIgnore // actually was wondering why this one don't have getter and setter for Employee object
+              // JsonIgnore is optional actually but put here first
   @ManyToOne
   @JoinColumn(name = "emp_no", referencedColumnName = "emp_no", insertable = false, updatable = false)
   private Employee employee;

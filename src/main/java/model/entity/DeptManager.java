@@ -1,5 +1,6 @@
 package model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import model.key.DeptManagerId;
 
@@ -23,6 +24,7 @@ public class DeptManager {
   @Column(name = "to_date")
   private LocalDate toDate;
 
+  @JsonIgnore // same for this! JsonIgnore is optional actually but put here first
   @ManyToOne
   @JoinColumn(name = "emp_no", referencedColumnName = "emp_no", insertable = false, updatable = false)
   private Employee employee;

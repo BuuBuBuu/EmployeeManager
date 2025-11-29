@@ -1,5 +1,6 @@
 package model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import model.key.SalaryId;
 
@@ -23,6 +24,15 @@ public class Salary {
   @Column(name = "to_date")
   private LocalDate toDate;
 
+  // "@JsonIgnore" to stop the infinite mirror issue
+  // https://www.baeldung.com/java-jsonignore-vs-transient
+  // "to specify a method or field that should be ignored during serialization and deserialization processes"
+  // essentially what is happening is that Jackson goes inside Employee, does getSalaries()
+  // -> Salary, does getEmployee()
+  // -> Employee, does getSalaries())
+  // -> etc. etc.
+  // tells Jackson: "When you are scanning a Salary, pretend getEmployee() doesn't exist."
+  @JsonIgnore
   @ManyToOne
   @JoinColumn(name = "emp_no", referencedColumnName = "emp_no", insertable = false, updatable = false)
   private Employee employee;

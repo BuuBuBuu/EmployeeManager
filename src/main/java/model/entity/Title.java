@@ -1,6 +1,7 @@
 package model.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import model.key.TitleId;
 
@@ -25,6 +26,7 @@ public class Title {
   @Column(name = "to_date")
   private LocalDate toDate;
 
+//  @JsonIgnore
   @ManyToOne
   @JoinColumn(name = "emp_no", referencedColumnName = "emp_no", insertable = false, updatable = false)
   private Employee employee;
@@ -70,11 +72,11 @@ public class Title {
     this.toDate = toDate;
   }
 
-  public Employee getEmployee() {
-    return employee;
-  }
-
-  public void setEmployee(Employee employee) {
-    this.employee = employee;
-  }
+//  public Employee getEmployee() {
+//    return employee;
+//  }
+//
+//  public void setEmployee(Employee employee) {
+//    this.employee = employee;
+//  }
 }

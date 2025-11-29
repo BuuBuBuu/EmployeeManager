@@ -62,3 +62,8 @@ then we have to start a new record in deptEmp for the new department that the em
 JPQL need to manually remove the sub tables
 if you use stuff like .remove() method then no need to manually create (This is the api method from JPA)
 
+some employees that got more fields (better for testing)
+http://localhost:8080/EmployeeManager/service/employees/110022 
+110039
+110085
+all employees only got at most 1 deptManagers field
