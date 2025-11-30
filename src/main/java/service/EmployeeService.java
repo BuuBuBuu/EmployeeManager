@@ -131,8 +131,13 @@ public class EmployeeService {
       for (Salary salary : salaries) {
         if (salary.getToDate().equals(datePointer)) {
           if (salary.getSalary() != promotionDTO.getSalary()) {
-            salary.setToDate(fromDate);
-            salaryDAO.create(em, promotionDTO.getEmpNo(), promotionDTO.getSalary(), fromDate, datePointer);
+            System.out.println("salary get from date: " + salary.getFromDate() + " fromDate: " + fromDate );
+            if (salary.getFromDate().isEqual(fromDate)) { //  if current salary's fromDate equals to today's date
+              salary.setSalary(promotionDTO.getSalary());
+            } else { // else, can create normally
+              salary.setToDate(fromDate);
+              salaryDAO.create(em, promotionDTO.getEmpNo(), promotionDTO.getSalary(), fromDate, datePointer);
+            }
           }
           break; // close the loop once you have found the current salary object
         }
