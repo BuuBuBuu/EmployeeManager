@@ -13,11 +13,15 @@ public class PromotionDTO {
         this.deptNo = deptNo;
     }
 
-    public PromotionDTO() {
-        this.salary = -1;
-        this.title = "";
-        this.deptNo = ""; // put in "default" values so that you can check whether user has provided that input
-    }
+    public PromotionDTO() {}
+
+// THIS IS USED IF WE WANT TO ACCOMODATE FOR SITUATIONS WHERE NOT ALL FIELDS ARE FILLED UP
+// can delete actually
+//    public PromotionDTO() {
+//        this.salary = -1;
+//        this.title = null;
+//        this.deptNo = null; // put in "default" values so that you can check whether user has provided that input
+//    }
 
     public int getEmpNo() {
         return empNo;

@@ -39,6 +39,7 @@ public class Employee {
   private List<Salary> salaries = new ArrayList<>();
 
   @OneToMany(mappedBy = "employee", fetch = FetchType.EAGER)
+  @OrderBy("fromDate ASC")
   private List<Title> titles = new ArrayList<>();
 
   public Employee() {}

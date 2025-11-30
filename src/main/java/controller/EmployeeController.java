@@ -50,19 +50,17 @@ public class EmployeeController {
   }
 
   // endpoint 4
-  /* SAMPLE JSON (not all fields needs to be filled in except empNo, PromotionDTO is built to handle it:
+  /* SAMPLE JSON (all fields needs to be filled in, even if there are no change):
    * {
    *  "empNo": 10001,
-   *  "salary": 91000, <-- only this is done so far
+   *  "salary": 91000,
    *  "title": "Star Intern"
-   *  "deptNo": "d005", // need to check whether same department
-   *  // and also need to check whether is already deptManager
-   *  // if is deptManager do we need to kick out the old manager ah
+   *  "deptNo": "d005"
    * }
-   * note that from date is defaulted to current date
+   *  note that from date is defaulted to current date
    */
   @POST
-  @Path("promote")
+  @Path("/promote")
   @Consumes(MediaType.APPLICATION_JSON)
   public Response promoteEmployee(
           PromotionDTO promotionDTO
