@@ -131,7 +131,6 @@ public class EmployeeService {
       for (Salary salary : salaries) {
         if (salary.getToDate().equals(datePointer)) {
           if (salary.getSalary() != promotionDTO.getSalary()) {
-            System.out.println("salary get from date: " + salary.getFromDate() + " fromDate: " + fromDate );
             if (salary.getFromDate().isEqual(fromDate)) { //  if current salary's fromDate equals to today's date
               salary.setSalary(promotionDTO.getSalary());
             } else { // else, can create normally
