@@ -1,8 +1,9 @@
 package model.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.*;
 import model.key.DeptManagerId;
+import model.util.DeptManagerSerializer;
 
 import java.time.LocalDate;
 
@@ -12,11 +13,11 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "dept_manager")
 @IdClass(DeptManagerId.class)
+@JsonSerialize(using = DeptManagerSerializer.class)
 public class DeptManager {
   /**
    * Employee number of the department manager
    */
-  @JsonIgnore
   @Id
   @Column(name = "emp_no")
   private int empNo;
@@ -43,7 +44,6 @@ public class DeptManager {
   /**
    * Reference to the associated Employee entity
    */
-  @JsonIgnore // same for this! JsonIgnore is optional actually but put here first
   @ManyToOne
   @JoinColumn(name = "emp_no", referencedColumnName = "emp_no", insertable = false, updatable = false)
   private Employee employee;

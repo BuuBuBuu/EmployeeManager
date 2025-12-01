@@ -1,8 +1,10 @@
 package model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.*;
 import model.key.DeptEmpId;
+import model.util.DeptEmpSerializer;
 
 import java.time.LocalDate;
 
@@ -12,7 +14,9 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "dept_emp")
 @IdClass(DeptEmpId.class)
+@JsonSerialize(using = DeptEmpSerializer.class)
 public class DeptEmp {
+
   /**
    * Employee number associated with the department.
    */
@@ -184,4 +188,5 @@ public class DeptEmp {
   public void setDepartment(Department department) {
     this.department = department;
   }
+
 }
