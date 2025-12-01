@@ -1,12 +1,10 @@
-import controller.DepartmentController;
-import controller.EmployeeController;
 import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.core.Application;
-import model.util.JacksonConfigUtil;
 
-import java.util.HashSet;
-import java.util.Set;
-
+/**
+ * JAX-RS App entry point for the Employee Service.
+ * Base URI starts with "/service"/..
+ */
 @ApplicationPath("/service")
 public class EmployeeApp extends Application {
     // leaving constructor empty - JAX-RS will do autoscan and load everything with @Path and @Provider

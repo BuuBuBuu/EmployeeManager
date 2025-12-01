@@ -10,6 +10,10 @@ import service.EmployeeService;
 
 import java.util.List;
 
+/**
+ * Constructor for EmployeeController
+ * Base URI starts with "/employee"/..
+ */
 @Path("/employees")
 public class EmployeeController {
 
