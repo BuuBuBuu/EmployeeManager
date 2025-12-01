@@ -14,20 +14,56 @@ import model.util.JPAUtil;
 import java.time.LocalDate;
 import java.util.*;
 
+/**
+ * Service class for Employee-related operations
+ */
 public class EmployeeService {
 
-    private EmployeeDAO dao = new EmployeeDAO();
-    private SalaryDAO salaryDAO = new SalaryDAO();
-    private TitleDAO titleDAO = new TitleDAO();
-    private DepartmentDAO departmentDAO = new DepartmentDAO();
-    private DeptEmpDAO deptEmpDAO = new DeptEmpDAO();
-    private DeptManagerDAO deptManagerDAO = new DeptManagerDAO();
+  /**
+   * Employee Data Access Object
+   */
+  private EmployeeDAO dao = new EmployeeDAO();
+  /**
+   * Salary Data Access Object
+   */
+  private SalaryDAO salaryDAO = new SalaryDAO();
 
-    private Employee findEmployeeById(int empNo, EntityManager em) {
-      return dao.findById(em, empNo);
-    }
+  /**
+   * Title Data Access Object
+   */
+  private TitleDAO titleDAO = new TitleDAO();
 
-    public Employee findEmployeeById(int empNo) {
+  /**
+   * Department Data Access Object
+   */
+  private DepartmentDAO departmentDAO = new DepartmentDAO();
+
+  /**
+   * DeptEmp Data Access Object
+   */
+  private DeptEmpDAO deptEmpDAO = new DeptEmpDAO();
+
+  /**
+   * DeptManager Data Access Object
+   */
+  private DeptManagerDAO deptManagerDAO = new DeptManagerDAO();
+
+  /**
+   * Helper method to find Employee by ID
+   * @param empNo Employee Number
+   * @param em EntityManager
+   * @return Employee object if found, else null
+   */
+  private Employee findEmployeeById(int empNo, EntityManager em) {
+    return dao.findById(em, empNo);
+  }
+
+  /**
+   * Public method to find Employee by ID
+   * @param empNo Employee Number
+   * @return Employee object if found, else null
+   */
+  public Employee findEmployeeById(int empNo) {
     {
       EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
 
@@ -41,6 +77,11 @@ public class EmployeeService {
     }
   }
 
+  /**
+   * Promote an employee based on the provided PromotionDTO
+   * @param promotionDTO Data Transfer Object containing promotion details
+   * @return Response indicating success or failure of the operation (If failed return BadRequest with error messages)
+   */
   public Response promoteEmployeeById(PromotionDTO promotionDTO) {
     EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
 
@@ -49,7 +90,7 @@ public class EmployeeService {
 
     List<String> errors = new ArrayList<>();
 
-    try{
+    try {
       Employee employee = findEmployeeById(promotionDTO.getEmpNo(), em);
       em.getTransaction().begin();
 
@@ -66,7 +107,7 @@ public class EmployeeService {
         errors.add("Invalid deptNo: Department not found");
       }
 
-      if ( promotionDTO.getTitle() == null || promotionDTO.getTitle().trim().isEmpty() ) {
+      if (promotionDTO.getTitle() == null || promotionDTO.getTitle().trim().isEmpty()) {
         errors.add("Please enter the employee's title.");
       }
 
@@ -76,9 +117,9 @@ public class EmployeeService {
 
       if (!errors.isEmpty()) { // if there are errors, throw exception
         throw new BadRequestException(Response.status(Response.Status.BAD_REQUEST)
-                .entity(Collections.singletonMap("error", errors))
-                .type(MediaType.APPLICATION_JSON)
-                .build());
+            .entity(Collections.singletonMap("error", errors))
+            .type(MediaType.APPLICATION_JSON)
+            .build());
       }
 
       // If reached here, inputs are valid
@@ -191,6 +232,12 @@ public class EmployeeService {
     }
   }
 
+  /**
+   * Get a paginated list of employees by department number
+   * @param deptNo Department Number
+   * @param page Page number for pagination (starting from 1)
+   * @return List of EmployeeDTO objects
+   */
   public List<EmployeeDTO> getEmployeesByDepartment(String deptNo, int page) {
     if (page < 1) {
       page = 1;
@@ -207,7 +254,11 @@ public class EmployeeService {
     }
   }
 
-  // helper
+  /**
+   * Helper method to convert a string to title case
+   * @param input Input string
+   * @return Title-cased string
+   */
   private String toTitleCase(String input) {
     if (input == null || input.isBlank()) {
       return input;

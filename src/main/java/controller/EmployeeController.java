@@ -11,16 +11,23 @@ import service.EmployeeService;
 import java.util.List;
 
 /**
- * Constructor for EmployeeController
+ * Controller for Employee-related endpoints
  * Base URI starts with "/employee"/..
  */
 @Path("/employees")
 public class EmployeeController {
 
+  /**
+   * Employee Service for handling business logic
+   */
   EmployeeService employeeService = new EmployeeService();
 
   ////////////////////// FOR TESTING OF TOMCAT SERVER ONLY //////////////////////
   // " http://localhost:8080/EmployeeManager/service/employees/ping"
+  /**
+   * Ping endpoint for testing server availability
+   * @return Response indicating service is online
+   */
   @GET
   @Path("/ping")
   public Response ping() {
@@ -31,6 +38,11 @@ public class EmployeeController {
 
   // endpoint 2
   // EXAMPLE: http://localhost:8080/EmployeeManager/service/employees/10001
+  /**
+   * Get employee by employee number
+   * @param empNo   Employee number
+   * @return Employee object
+   */
   @GET
   @Path("/{empNo}")
   @Produces(MediaType.APPLICATION_JSON)
@@ -43,6 +55,12 @@ public class EmployeeController {
   // endpoint 3
   // EXAMPLE: http://localhost:8080/EmployeeManager/service/employees/department/d005
   // EXAMPLE: http://localhost:8080/EmployeeManager/service/employees/department/d005?page=2
+  /**
+   * Get employees by department number with pagination
+   * @param deptNo Department number
+   * @param page   Page number (default is 1)
+   * @return List of EmployeeDTO objects
+   */
   @GET
   @Path("/department/{deptNo}")
   @Produces(MediaType.APPLICATION_JSON)
@@ -54,14 +72,17 @@ public class EmployeeController {
   }
 
   // endpoint 4
-  /* SAMPLE JSON (all fields needs to be filled in, even if there are no change):
+  /**
+   * Promote an employee based on the provided PromotionDTO
+   * Takes in format of:
    * {
    *  "empNo": 10001,
    *  "salary": 91000,
    *  "title": "Star Intern"
    *  "deptNo": "d005"
    * }
-   *  note that from date is defaulted to current date
+   * @param promotionDTO promotion details
+   * @return Response indicating success or failure of the operation
    */
   @POST
   @Path("/promote")
@@ -71,5 +92,4 @@ public class EmployeeController {
   ) {
     return employeeService.promoteEmployeeById(promotionDTO);
   }
-
 }

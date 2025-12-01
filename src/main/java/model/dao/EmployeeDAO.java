@@ -7,16 +7,37 @@ import model.entity.Employee;
 import model.dto.EmployeeDTO;
 import java.util.List;
 
+/**
+ * Data Access Object for Employee entity
+ */
 public class EmployeeDAO {
 
+  /**
+   * Find an Employee by their employee number
+   * @param em EntityManager
+   * @param empNo Employee number
+   * @return Employee object or null if not found
+   */
   public Employee findById(EntityManager em, int empNo) {
     return em.find(Employee.class, empNo);
   }
 
+  /**
+   * Retrieve all Employee records
+   * @param em Entitymanager
+   * @return List of Employee objects
+   */
   public List<Employee> findAll(EntityManager em) {
     return em.createQuery("SELECT e FROM Employee e", Employee.class).getResultList();
   }
 
+  /**
+   * Find Employees by Department with pagination
+   * @param em EntityManager
+   * @param deptNo Department Number
+   * @param page Page number (1-based)
+   * @return List of EmployeeDTO objects
+   */
   public List<EmployeeDTO> findEmployeesByDepartment(EntityManager em, String deptNo, int page) {
 
     // calculate the offset using page param

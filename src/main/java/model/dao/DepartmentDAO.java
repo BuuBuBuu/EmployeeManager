@@ -6,13 +6,27 @@ import model.entity.Department;
 
 import java.util.List;
 
+/**
+ * Data Access Object for Department entity
+ */
 public class DepartmentDAO {
 
   // for validation if a department no. exists before executing promote employee action
+  /**
+   * Find a Department by its ID
+   * @param em EntityManager
+   * @param id Department ID
+   * @return Department object or null if not found
+   */
   public Department findById(EntityManager em, String id) {
     return em.find(Department.class, id);
   }
 
+  /**
+   * Retrieve all Department records
+   * @param em EntityManager
+   * @return List of Department objects
+   */
   public List<Department> findAll(EntityManager em) {
     TypedQuery<Department> q = em.createQuery("SELECT d FROM Department d", Department.class);
     return q.getResultList();

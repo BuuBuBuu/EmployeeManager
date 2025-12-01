@@ -4,6 +4,9 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
+/**
+ * JPA Utility class for managing EntityManagerFactory and EntityManager instances.
+ */
 public class JPAUtil {
 
   // Adapt from digipen sample
@@ -12,6 +15,9 @@ public class JPAUtil {
   // Need to have public static method that other class can call that returns the instance
 
   // declare private static final EntityManagerFactory
+  /**
+   * Singleton EntityManagerFactory instance
+   */
   private static final EntityManagerFactory emf;
 
   // static initialize stuff
@@ -26,20 +32,33 @@ public class JPAUtil {
     }
   }
 
-  // private construtor to prefent instantiation for singleton
+  /**
+   * Private constructor to prevent instantiation for singleton
+   */
   private JPAUtil() {}
 
   // THIS IS THE PUBLIC ACCESS METHOD FOR GETTING EMF
+  /**
+   * Get the singleton EntityManagerFactory instance
+   * @return EntityManagerFactory instance
+   */
   public static EntityManagerFactory getEntityManagerFactory() {
     return emf;
   }
 
   // THIS IS THE PUBLIC ACCESS METHOD FOR GETTING EM
+  /**
+   * Create and return a new EntityManager instance
+   * @return EntityManager instance
+   */
   public static EntityManager getEntityManager() {
     return emf.createEntityManager();
   }
 
   // Shutdown method
+  /**
+   * Shutdown the EntityManagerFactory
+   */
   public static void shutdown() {
     if (emf != null) {
       emf.close();

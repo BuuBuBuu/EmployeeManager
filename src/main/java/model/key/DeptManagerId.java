@@ -1,24 +1,43 @@
 package model.key;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
-
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * Composite Key class for DeptManager entity
+ */
 public class DeptManagerId implements Serializable {
+  /**
+   * Serialization version UID
+   */
   private int empNo;
 
+  /**
+   * Department number
+   */
   private String deptNo;
 
+  /**
+   * Default constructor
+   */
   public DeptManagerId() {}
 
+  /**
+   * Parameterized constructor
+   * @param empNo Employee number
+   * @param deptNo Department number
+   */
   public DeptManagerId(int empNo, String deptNo) {
     this.empNo = empNo;
     this.deptNo = deptNo;
   }
 
   // Apparently have to override the equals and hashCode methods
+  /**
+   * Equal mtd - have to override
+   * @param o Object to compare
+   * @return true if equal, false otherwise
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -27,8 +46,44 @@ public class DeptManagerId implements Serializable {
     return empNo == that.empNo && Objects.equals(deptNo, that.deptNo);
   }
 
+  /**
+   * Hashcode mtd - have to override
+   * @return hashcode
+   */
   @Override
   public int hashCode() {
     return Objects.hash(empNo, deptNo);
+  }
+
+  /**
+   * Get empNo
+   * @return empNo
+   */
+  public int getEmpNo() {
+    return empNo;
+  }
+
+  /**
+   * Set empNo
+   * @param empNo empNo
+   */
+  public void setEmpNo(int empNo) {
+    this.empNo = empNo;
+  }
+
+  /**
+   * Get deptNo
+   * @return deptNo
+   */
+  public String getDeptNo() {
+    return deptNo;
+  }
+
+  /**
+   * Set deptNo
+   * @param deptNo deptNo
+   */
+  public void setDeptNo(String deptNo) {
+    this.deptNo = deptNo;
   }
 }

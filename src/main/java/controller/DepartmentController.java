@@ -9,13 +9,23 @@ import service.DepartmentService;
 
 import java.util.List;
 
+/**
+ * Controller for Department-related endpoints
+ */
 @Path("/departments")
 public class DepartmentController {
 
+  /**
+   * Department Service for handling business logic
+   */
   private final DepartmentService service = new DepartmentService();
 
-// endpoint 1 - GET /departments
-// http://localhost:8080/EmployeeManager/service/departments
+  // endpoint 1 - GET /departments
+  // http://localhost:8080/EmployeeManager/service/departments
+  /**
+   * Get all departments
+   * @return List of Department objects
+   */
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   public List<Department> getAllDepartments() {
