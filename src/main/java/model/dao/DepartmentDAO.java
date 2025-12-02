@@ -28,7 +28,7 @@ public class DepartmentDAO {
    * @return List of Department objects
    */
   public List<Department> findAll(EntityManager em) {
-    TypedQuery<Department> q = em.createQuery("SELECT d FROM Department d", Department.class);
+    TypedQuery<Department> q = em.createQuery("SELECT d FROM Department d ORDER BY d.deptNo", Department.class);
     return q.getResultList();
   }
 }

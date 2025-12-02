@@ -20,7 +20,7 @@ public class DeptEmp {
   /**
    * Employee number associated with the department.
    */
-  @JsonIgnore
+//  @JsonIgnore
   @Id
   @Column(name = "emp_no")
   private int empNo;
@@ -62,7 +62,7 @@ public class DeptEmp {
   /**
    * Reference to the associated Employee entity.
    */
-  @JsonIgnore
+//  @JsonIgnore
   @ManyToOne
   @JoinColumn(name = "emp_no", referencedColumnName = "emp_no", insertable = false, updatable = false)
   private Employee employee;

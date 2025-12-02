@@ -169,6 +169,7 @@ public class EmployeeService {
 
       // ============== salary ==============
       List<Salary> salaries = employee.getSalaries();
+
       for (Salary salary : salaries) {
         if (salary.getToDate().equals(datePointer)) {
           if (salary.getSalary() != promotionDTO.getSalary()) {
@@ -187,20 +188,62 @@ public class EmployeeService {
       // Make the title to title case with our helper func below
       String normalizedTitle = promotionDTO.getTitle() == null ? null : toTitleCase(promotionDTO.getTitle());
       List<Title> titles = employee.getTitles();
-      // Loop through each title
+
+      boolean createRecord = false;
+      // Close all records first
       for (Title title : titles) {
-        // Check the title's to date to get the currently active title record
+        // check the open record
         if (title.getToDate().equals(datePointer)) {
-          // Check whether title in currently active title record is the same as the title in promotionDTO
-          // Do lower case?
+          // if the open record title not equals to promotion title
           if (!title.getTitle().equalsIgnoreCase(promotionDTO.getTitle())) {
-            // If different then we will set the fromDate to today's date - 1 (Not sure if it matters just ignore first)
+            // close the open record
             title.setToDate(fromDate);
-            titleDAO.create(em, promotionDTO.getEmpNo(), normalizedTitle, fromDate, datePointer);
+            // set a boolean to signify that we have closed and need to create
+            createRecord = true;
+          } else {
+            // We reach here if the open record title is same as promotion title
+            // Check if same title record from date is today's date
+            if (title.getFromDate().equals(fromDate)) {
+              // check if same title record to date is today's date
+              if (title.getToDate().equals(fromDate)) {
+                // Reopen record
+                title.setToDate(datePointer);
+              }
+            }
           }
-          break; // close the loop once you have found the current title object
         }
       }
+
+      if (createRecord) {
+        titleDAO.create(em, promotionDTO.getEmpNo(), normalizedTitle, fromDate, datePointer);
+      }
+
+//      // Loop through each title
+//      for (Title title : titles) {
+//        boolean changedOldTitleToActive = false;
+//        // Check if any of the existing titles match the new title being promoted to
+//        if (title.getTitle().equalsIgnoreCase(normalizedTitle)) {
+//          if (title.getFromDate().isEqual(fromDate)) {
+//            // If the title being promoted to is the same as the current title
+//            // and the fromDate is today, check toDate and make it datePointer if needed
+//            if (!title.getToDate().equals(datePointer)) {
+//              title.setToDate(datePointer);
+//              changedOldTitleToActive = true;
+//            }
+//          }
+//        }
+//        // Check the title's to date to get the currently active title record
+//        if (title.getToDate().equals(datePointer) && changedOldTitleToActive) {
+//          // Check whether title in currently active title record is the same as the title in promotionDTO
+//          // Do lower case?
+//          if (!title.getTitle().equalsIgnoreCase(promotionDTO.getTitle())) {
+//            // If different then we will set the fromDate to today's date - 1 (Not sure if it matters just ignore first)
+//            title.setToDate(fromDate);
+//            titleDAO.create(em, promotionDTO.getEmpNo(), normalizedTitle, fromDate, datePointer);
+//          }
+//          break; // close the loop once you have found the current title object
+//        }
+//      }
 
       // ============== department ==============
       List<DeptEmp> deptEmps = employee.getdeptEmployed();
