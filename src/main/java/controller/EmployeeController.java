@@ -44,10 +44,10 @@ public class EmployeeController {
    * @return Employee object
    */
   @GET
-  @Path("/{empNo}")
+  @Path("/")
   @Produces(MediaType.APPLICATION_JSON)
   public Employee getEmployeeById(
-          @PathParam("empNo") int empNo
+          @QueryParam("empNo") int empNo
   ) {
     return employeeService.findEmployeeById(empNo);
   }
@@ -62,10 +62,10 @@ public class EmployeeController {
    * @return List of EmployeeDTO objects
    */
   @GET
-  @Path("/department/{deptNo}")
+  @Path("/department")
   @Produces(MediaType.APPLICATION_JSON)
   public List<EmployeeDTO> getEmployeesByDept(
-      @PathParam("deptNo") String deptNo,
+      @QueryParam("deptNo") String deptNo,
       @QueryParam("page") @DefaultValue("1") int page
   ) {
     return employeeService.getEmployeesByDepartment(deptNo, page);
