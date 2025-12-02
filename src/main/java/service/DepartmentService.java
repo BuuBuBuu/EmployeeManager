@@ -21,15 +21,8 @@ public class DepartmentService {
    * @return List of Department objects
    */
   public List<Department> getAllDepartments() {
-    EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
-
-    try {
-      return dao.findAll(em);
-    } catch (Exception e) {
-      throw e;
-    } finally {
-      em.close();
-    }
+//    EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+      return dao.findAll();
   }
 
 }

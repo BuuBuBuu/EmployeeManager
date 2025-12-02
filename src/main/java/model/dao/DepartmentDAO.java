@@ -3,6 +3,7 @@ package model.dao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import model.entity.Department;
+import model.util.JPAUtil;
 
 import java.util.List;
 
@@ -24,11 +25,13 @@ public class DepartmentDAO {
 
   /**
    * Retrieve all Department records
-   * @param em EntityManager
    * @return List of Department objects
    */
-  public List<Department> findAll(EntityManager em) {
-    TypedQuery<Department> q = em.createQuery("SELECT d FROM Department d ORDER BY d.deptNo", Department.class);
-    return q.getResultList();
+  public List<Department> findAll() {
+
+    try (EntityManager em = JPAUtil.getEntityManager()) {
+      TypedQuery<Department> q = em.createQuery("SELECT d FROM Department d ORDER BY d.deptNo", Department.class);
+      return q.getResultList();
+    }
   }
 }

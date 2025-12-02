@@ -64,17 +64,8 @@ public class EmployeeService {
    * @return Employee object if found, else null
    */
   public Employee findEmployeeById(int empNo) {
-    {
-      EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
-
-      try {
-        return dao.findById(em, empNo);
-      } catch (Exception e) {
-        throw e;
-      } finally {
-        em.close();
-      }
-    }
+//      EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+        return dao.findById(empNo);
   }
 
   /**
@@ -269,7 +260,11 @@ public class EmployeeService {
       if (e instanceof WebApplicationException) {
         throw e; // to send correct 400 code
       }
-      return Response.serverError().build();
+//      return Response.serverError().build();
+      return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+          .entity(Collections.singletonMap("error", "An unexpected error occurred: " + e.getMessage()))
+          .type(MediaType.APPLICATION_JSON)
+          .build();
     } finally {
       em.close();
     }
@@ -286,15 +281,8 @@ public class EmployeeService {
       page = 1;
     }
 
-    EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
-
-    try {
-      return dao.findEmployeesByDepartment(em, deptNo, page);
-    } catch (Exception e) {
-      throw e;
-    } finally {
-      em.close();
-    }
+//    EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+      return dao.findEmployeesByDepartment(deptNo, page);
   }
 
   /**

@@ -18,19 +18,7 @@ public class JPAUtil {
   /**
    * Singleton EntityManagerFactory instance
    */
-  private static final EntityManagerFactory emf;
-
-  // static initialize stuff
-  static {
-    try {
-      emf = Persistence.createEntityManagerFactory("EmployeeManagerPU");
-    } catch (Throwable ex) {
-      System.err.println("EMF initialization failed." + ex);
-
-      // stop application if db connection/config not working or bad
-      throw new ExceptionInInitializerError(ex);
-    }
-  }
+  private static EntityManagerFactory emf;
 
   /**
    * Private constructor to prevent instantiation for singleton
@@ -42,7 +30,16 @@ public class JPAUtil {
    * Get the singleton EntityManagerFactory instance
    * @return EntityManagerFactory instance
    */
-  public static EntityManagerFactory getEntityManagerFactory() {
+  public static synchronized EntityManagerFactory getEntityManagerFactory() {
+    if (emf == null) {
+      try {
+        emf = Persistence.createEntityManagerFactory("EmployeeManagerPU");
+      } catch (Throwable ex) {
+        System.err.println("EMF initialization failed." + ex);
+        // stop application if db connection/config not working or bad
+        throw new ExceptionInInitializerError(ex);
+      }
+    }
     return emf;
   }
 
