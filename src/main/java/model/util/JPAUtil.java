@@ -49,7 +49,8 @@ public class JPAUtil {
    * @return EntityManager instance
    */
   public static EntityManager getEntityManager() {
-    return emf.createEntityManager();
+    EntityManagerFactory factory = getEntityManagerFactory();
+    return factory.createEntityManager();
   }
 
   // Shutdown method

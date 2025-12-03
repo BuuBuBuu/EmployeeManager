@@ -37,7 +37,7 @@ public class EmployeeController {
 
 
   // endpoint 2
-  // EXAMPLE: http://localhost:8080/EmployeeManager/service/employees/10001
+  // EXAMPLE: http://localhost:8080/EmployeeManager/service/employees/?empNo=10001
   /**
    * Get employee by employee number
    * @param empNo   Employee number
@@ -53,8 +53,8 @@ public class EmployeeController {
   }
 
   // endpoint 3
-  // EXAMPLE: http://localhost:8080/EmployeeManager/service/employees/department/d005
-  // EXAMPLE: http://localhost:8080/EmployeeManager/service/employees/department/d005?page=2
+  // EXAMPLE: http://localhost:8080/EmployeeManager/service/employees/department/?deptNo=d005
+  // EXAMPLE: http://localhost:8080/EmployeeManager/service/employees/department/?deptNo=d005&&page=2
   /**
    * Get employees by department number with pagination
    * @param deptNo Department number
@@ -78,7 +78,7 @@ public class EmployeeController {
    * {
    *  "empNo": 10001,
    *  "salary": 91000,
-   *  "title": "Star Intern"
+   *  "title": "Star Intern",
    *  "deptNo": "d005"
    * }
    * @param promotionDTO promotion details
