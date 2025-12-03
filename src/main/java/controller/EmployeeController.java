@@ -72,6 +72,7 @@ public class EmployeeController {
   }
 
   // endpoint 4
+  // http://localhost:8080/EmployeeManager/service/employees/promote
   /**
    * Promote an employee based on the provided PromotionDTO
    * Takes in format of:
