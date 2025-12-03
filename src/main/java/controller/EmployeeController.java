@@ -54,7 +54,7 @@ public class EmployeeController {
 
   // endpoint 3
   // EXAMPLE: http://localhost:8080/EmployeeManager/service/employees/department/?deptNo=d005
-  // EXAMPLE: http://localhost:8080/EmployeeManager/service/employees/department/?deptNo=d005&&page=2
+  // EXAMPLE: http://localhost:8080/EmployeeManager/service/employees/department/?deptNo=d005&page=2
   /**
    * Get employees by department number with pagination
    * @param deptNo Department number
